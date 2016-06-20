@@ -1,7 +1,7 @@
 package de.jro.voicetv;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class TvInput extends AppCompatActivity {
 

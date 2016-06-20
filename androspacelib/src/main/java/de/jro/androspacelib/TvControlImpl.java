@@ -4,7 +4,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 /**
- * Created by jro on 25/04/16.
+ * Created by J.Rossa on 25/04/16.
  */
 public class TvControlImpl implements ITvControl {
 
