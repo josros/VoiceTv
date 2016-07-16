@@ -20,7 +20,7 @@ public class TvControlImpl implements ITvControl {
         KeyDto keyDto = new KeyDto();
         keyDto.setKey(key.getJointspaceValue());
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForLocation(url, keyDto);
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        restTemplate.postForLocation(url, keyDto);
     }
 }
