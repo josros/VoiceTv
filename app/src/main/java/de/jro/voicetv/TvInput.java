@@ -115,6 +115,20 @@ public class TvInput extends AppCompatActivity {
             case "Lauter":
             case "lauter":
                 return Key.VOLUMEUP;
+            case "Weiter":
+            case "weiter":
+            case "Vor":
+            case "vor":
+            case "Hoch":
+            case "hoch":
+                return Key.NEXT;
+            case "Zurück":
+            case "zurück":
+            case "Rückwärts":
+            case "rückwärts":
+            case "Runter":
+            case "runter":
+                return Key.PREVIOUS;
             // TODO more mappings
             default:
                 String error = String.format("Could not match key for query: %s", query);
