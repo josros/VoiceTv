@@ -1,7 +1,7 @@
 package de.jro.voicetv;
 
 /**
- * Created by jro on 16/07/16.
+ * Created by J.Rossa on 16/07/16.
  */
 public class AsyncTaskResult<T> {
     private T result;

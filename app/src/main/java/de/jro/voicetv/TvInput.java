@@ -47,8 +47,8 @@ public class TvInput extends AppCompatActivity {
             infoView.setText(String.format("Matched key: %s", key));
             TextView enteredKeyView = (TextView) findViewById(R.id.enteredKey);
             // TODO improve configuration
-            //192.168.0.11
-            new TvInputTask("192.168.0.105", enteredKeyView).execute(key);
+            //tv in local network: 192.168.0.11 int test endpoint: 192.168.0.105
+            new TvInputTask("192.168.0.11", enteredKeyView).execute(key);
         } catch (Exception ex) {
             Log.e(TvInput.class.getSimpleName(), ex.getMessage());
         }
@@ -58,8 +58,63 @@ public class TvInput extends AppCompatActivity {
     private Key queryToKey(String query) {
 
         switch (query) {
+            case "0":
+                return Key.DIGIT0;
             case "1":
+            case "eins":
+            case "Eins":
                 return Key.DIGIT1;
+            case "2":
+            case "zwei":
+            case "Zwei":
+                return Key.DIGIT2;
+            case "3":
+            case "drei":
+            case "Drei":
+                return Key.DIGIT3;
+            case "4":
+            case "vier":
+            case "Vier":
+                return Key.DIGIT4;
+            case "5":
+            case "fünf":
+            case "Fünf":
+                return Key.DIGIT5;
+            case "6":
+            case "sechs":
+            case "Sechs":
+            case "sex":
+            case "Sex":
+                return Key.DIGIT6;
+            case "7":
+            case "sieben":
+            case "Sieben":
+                return Key.DIGIT7;
+            case "8":
+            case "acht":
+            case "Acht":
+                return Key.DIGIT8;
+            case "9":
+            case "neun":
+            case "Neun":
+                return Key.DIGIT9;
+            case "Anschalten":
+            case "Ausschalten":
+            case "anschalten":
+            case "ausschalten":
+            case "einschalten":
+            case "Einschalten":
+            case "an":
+            case "aus":
+            case "An":
+            case "Aus":
+                return Key.STANDBY;
+            case "Leiser":
+            case "leiser":
+                return Key.VOLUMEDOWN;
+            case "Lauter":
+            case "lauter":
+                return Key.VOLUMEUP;
             // TODO more mappings
             default:
                 String error = String.format("Could not match key for query: %s", query);
