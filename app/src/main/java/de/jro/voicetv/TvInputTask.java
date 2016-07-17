@@ -14,11 +14,11 @@ import de.jro.androspacelib.TvControlFactory;
 public class TvInputTask extends AsyncTask<Key, Void, AsyncTaskResult<Key>> {
 
     private final ITvControl control;
-    private final TextView enteredKeyView;
+    private final TvInput tvInputActivity;
 
-    public TvInputTask(String ipAddr, TextView enteredKeyView) {
+    public TvInputTask(String ipAddr, TvInput tvInputActivity) {
         this.control = TvControlFactory.getInstance().createTvControl(ipAddr);
-        this.enteredKeyView = enteredKeyView;
+        this.tvInputActivity = tvInputActivity;
     }
 
     @Override
@@ -28,17 +28,20 @@ public class TvInputTask extends AsyncTask<Key, Void, AsyncTaskResult<Key>> {
             control.enterKey(key);
             return new AsyncTaskResult<Key>(key);
         } catch (Exception e) {
-            Log.e("TvInputTask", e.getMessage(), e);
+            Log.e(TvInputTask.class.getSimpleName(), e.getMessage(), e);
             return new AsyncTaskResult<Key>(e);
         }
     }
 
     @Override
     protected void onPostExecute(AsyncTaskResult<Key> result) {
+        TextView enteredKeyView = (TextView) tvInputActivity.findViewById(R.id.enteredKey);
         if(!result.hasError()) {
-            enteredKeyView.setText("Entered key: " + result.getResult().name());
+            enteredKeyView.setText(String.format(
+                    tvInputActivity.getString(R.string.tvinput_outfield_ekey_msg),
+                    result.getResult().name()));
         } else {
-            String error = String.format("Entering key failed due to the following reason: %s",
+            String error = String.format(tvInputActivity.getString(R.string.tvinput_err_enter_key),
                     result.getError().getMessage());
             enteredKeyView.setText(error);
         }
