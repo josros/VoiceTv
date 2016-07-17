@@ -59,12 +59,11 @@ public class TvInput extends AppCompatActivity {
         TextView infoView = (TextView) findViewById(R.id.infoView);
         try {
             // match query to key
-            Key key = queryToKey(query);
+            Key key = queryToKey(query.toLowerCase());
 
             // show match result in the UI
             infoView.setText(String.format(getString(R.string.tvinput_outfield_mkey_msg), key));
 
-            TextView enteredKeyView = (TextView) findViewById(R.id.enteredKey);
             // enter key task
             new TvInputTask(getCurrentEditTextIp(), this).execute(key);
 
@@ -111,120 +110,80 @@ public class TvInput extends AppCompatActivity {
         return ipAddressEditText.getText().toString();
     }
 
-    private Key queryToKey(String query) {
+    private Key queryToKey(String queryLowerCase) {
 
-        switch (query) {
+        switch (queryLowerCase) {
             case "0":
             case "null":
-            case "Null":
             case "zero":
-            case "Zero":
                 return Key.DIGIT0;
             case "1":
             case "eins":
-            case "Eins":
             case "one":
-            case "One":
                 return Key.DIGIT1;
             case "2":
             case "zwei":
-            case "Zwei":
             case "two":
-            case "Two":
                 return Key.DIGIT2;
             case "3":
             case "drei":
-            case "Drei":
             case "three":
-            case "Three":
                 return Key.DIGIT3;
             case "4":
             case "vier":
-            case "Vier":
             case "four":
-            case "Four":
                 return Key.DIGIT4;
             case "5":
             case "fünf":
-            case "Fünf":
             case "five":
-            case "Five":
                 return Key.DIGIT5;
             case "6":
             case "sechs":
-            case "Sechs":
             case "sex":
-            case "Sex":
             case "six":
-            case "Six":
                 return Key.DIGIT6;
             case "7":
             case "sieben":
-            case "Sieben":
             case "seven":
-            case "Seven":
                 return Key.DIGIT7;
             case "8":
             case "acht":
-            case "Acht":
             case "eight":
-            case "Eight":
                 return Key.DIGIT8;
             case "9":
             case "neun":
-            case "Neun":
             case "nine":
-            case "Nine":
                 return Key.DIGIT9;
-            case "Anschalten":
-            case "Ausschalten":
             case "anschalten":
             case "ausschalten":
             case "einschalten":
-            case "Einschalten":
             case "an":
             case "aus":
-            case "An":
-            case "Aus":
-            case "Off":
             case "off":
             case "turn off":
             case "turn on":
-            case "On":
             case "on":
                 return Key.STANDBY;
-            case "Leiser":
             case "leiser":
             case "quieter":
-            case "Quieter":
             case "less noisy":
                 return Key.VOLUMEDOWN;
-            case "Lauter":
             case "lauter":
             case "louder":
-            case "Louder":
                 return Key.VOLUMEUP;
-            case "Weiter":
             case "weiter":
-            case "Vor":
             case "vor":
-            case "Hoch":
             case "hoch":
             case "next":
-            case "Next":
                 return Key.NEXT;
-            case "Zurück":
             case "zurück":
-            case "Rückwärts":
             case "rückwärts":
-            case "Runter":
             case "runter":
             case "previous":
-            case "Previous":
                 return Key.PREVIOUS;
-            // TODO more mappings
+            // TODO more mappings, make configurable
             default:
-                String error = String.format("Could not match key for query: %s", query);
+                String error = String.format("Could not match key for query: %s", queryLowerCase);
                 throw new RuntimeException(error);
         }
 
