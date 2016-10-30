@@ -10,12 +10,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import de.jro.androspacelib.Key;
 
 public class TvInput extends AppCompatActivity {
 
     private static final String PREFS_NAME = "TvPrefs";
     private static final String TV_IP_KEY = "TvIp";
+    private static Pattern LONG_PATTERN = Pattern.compile("^-?\\d{1,19}$");
 
     private String query;
 
@@ -59,13 +66,13 @@ public class TvInput extends AppCompatActivity {
         TextView infoView = (TextView) findViewById(R.id.infoView);
         try {
             // match query to key
-            Key key = queryToKey(query.toLowerCase());
+            List<Key> keys = queryToKeys(query.toLowerCase());
 
             // show match result in the UI
-            infoView.setText(String.format(getString(R.string.tvinput_outfield_mkey_msg), key));
+            infoView.setText(String.format(getString(R.string.tvinput_outfield_mkey_msg), KeyNamesConverter.toString(keys)));
 
             // enter key task
-            new TvInputTask(getCurrentEditTextIp(), this).execute(key);
+            new TvInputTask(getCurrentEditTextIp(), this).execute(keys);
 
         } catch (Exception ex) {
             Log.e(TvInput.class.getSimpleName(), ex.getMessage());
@@ -110,50 +117,50 @@ public class TvInput extends AppCompatActivity {
         return ipAddressEditText.getText().toString();
     }
 
-    private Key queryToKey(String queryLowerCase) {
+    private List<Key> queryToKeys(String queryLowerCase) {
 
         switch (queryLowerCase) {
             case "0":
             case "null":
             case "zero":
-                return Key.DIGIT0;
+                return Arrays.asList(Key.DIGIT0);
             case "1":
             case "eins":
             case "one":
-                return Key.DIGIT1;
+                return Arrays.asList(Key.DIGIT1);
             case "2":
             case "zwei":
             case "two":
-                return Key.DIGIT2;
+                return Arrays.asList(Key.DIGIT2);
             case "3":
             case "drei":
             case "three":
-                return Key.DIGIT3;
+                return Arrays.asList(Key.DIGIT3);
             case "4":
             case "vier":
             case "four":
-                return Key.DIGIT4;
+                return Arrays.asList(Key.DIGIT4);
             case "5":
             case "fünf":
             case "five":
-                return Key.DIGIT5;
+                return Arrays.asList(Key.DIGIT5);
             case "6":
             case "sechs":
             case "sex":
             case "six":
-                return Key.DIGIT6;
+                return Arrays.asList(Key.DIGIT6);
             case "7":
             case "sieben":
             case "seven":
-                return Key.DIGIT7;
+                return Arrays.asList(Key.DIGIT7);
             case "8":
             case "acht":
             case "eight":
-                return Key.DIGIT8;
+                return Arrays.asList(Key.DIGIT8);
             case "9":
             case "neun":
             case "nine":
-                return Key.DIGIT9;
+                return Arrays.asList(Key.DIGIT9);
             case "anschalten":
             case "ausschalten":
             case "einschalten":
@@ -163,30 +170,52 @@ public class TvInput extends AppCompatActivity {
             case "turn off":
             case "turn on":
             case "on":
-                return Key.STANDBY;
+                return Arrays.asList(Key.STANDBY);
             case "leiser":
             case "quieter":
             case "less noisy":
-                return Key.VOLUMEDOWN;
+                return Arrays.asList(Key.VOLUMEDOWN);
             case "lauter":
             case "louder":
-                return Key.VOLUMEUP;
+                return Arrays.asList(Key.VOLUMEUP);
             case "weiter":
             case "vor":
             case "hoch":
             case "next":
-                return Key.NEXT;
+                return Arrays.asList(Key.NEXT);
             case "zurück":
             case "rückwärts":
             case "runter":
             case "previous":
-                return Key.PREVIOUS;
+                return Arrays.asList(Key.PREVIOUS);
             // TODO more mappings, make configurable
             default:
+                if(isQueryNumber(queryLowerCase)) {
+                    return convertToKeys(queryLowerCase);
+                }
+                // in case its not even a number, we can not match the query
                 String error = String.format("Could not match key for query: %s", queryLowerCase);
                 throw new RuntimeException(error);
         }
 
+    }
+
+    private boolean isQueryNumber(String query) {
+        Matcher matcher = LONG_PATTERN.matcher(query);
+        boolean isANumber = matcher.matches();
+        return isANumber;
+    }
+
+    private List<Key> convertToKeys(String numberQuery) {
+        List<Key> keys = new ArrayList<>();
+        for(int i = 0; i < numberQuery.length(); i++) {
+            Character digit = numberQuery.charAt(i);
+            String keyStr = String.format("DIGIT%s", digit);
+            Key key = Key.valueOf(keyStr);
+            keys.add(key);
+        }
+        keys.add(Key.CONFIRM);
+        return keys;
     }
 
 }

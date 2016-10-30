@@ -4,12 +4,12 @@
     <string name="app_ip_input_button">Remember</string>
     <string name="app_outfields_desc">Shows current user query and program information:</string>
     <string name="app_outfield_query">User query</string>
-    <string name="app_outfield_mkey">Matched key</string>
-    <string name="app_outfield_ekey">Entered key</string>
+    <string name="app_outfield_mkey">Matched key(s)</string>
+    <string name="app_outfield_ekey">Entered key(s)</string>
     <string name="tvinput_outfield_query_msg">User query: %s</string>
-    <string name="tvinput_outfield_mkey_msg">Matched key: %s</string>
-    <string name="tvinput_outfield_ekey_msg">Entered key: %s</string>
-    <string name="tvinput_err_matching_key">Matching key failed due to the following reason: %s</string>
-    <string name="tvinput_err_enter_key">Entering key failed due to the following reason: %s</string>
+    <string name="tvinput_outfield_mkey_msg">Matched key(s): %s</string>
+    <string name="tvinput_outfield_ekey_msg">Entered key(s): %s</string>
+    <string name="tvinput_err_matching_key">Matching key(s) failed due to the following reason: %s</string>
+    <string name="tvinput_err_enter_key">Entering key(s) failed due to the following reason: %s</string>
     <string name="useInfo">Directions for use:\n\n1. Activate google voice detection to be active on every screen.\n2. Say: \"Ok google\" to initialize voice detection.\n3. Say: \"note to myself <![CDATA[<action>]]>\" to execute voice command.\n\nPlease note, that VoiceTV App must be configured as the default App for note command handling.</string>
 </resources>

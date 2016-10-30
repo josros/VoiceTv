@@ -3,14 +3,14 @@
     <string name="app_name">Sprach-Fernbedienung</string>
     <string name="app_ip_input_button">Merken</string>
     <string name="app_ip_input_desc">Bitte geben Sie die IP-Adresse Ihres Fernsehers an:</string>
-    <string name="app_outfield_ekey">Gedrückter Knopf</string>
-    <string name="app_outfield_mkey">Gefundener Knopf</string>
+    <string name="app_outfield_ekey">Betätigte Taste(n)</string>
+    <string name="app_outfield_mkey">Gefundene Taste(n)</string>
     <string name="app_outfield_query">Sprachanfrage</string>
     <string name="app_outfields_desc">Zeigt Benutzereingaben und Programmausgaben:</string>
     <string name="tvinput_outfield_query_msg">Sprachanfrage: %s</string>
-    <string name="tvinput_outfield_mkey_msg">Gefundener Knopf: %s</string>
-    <string name="tvinput_outfield_ekey_msg">Gedrückter Knopf: %s</string>
-    <string name="tvinput_err_enter_key">Knopfdrücken fehlgeschlagen. Grund: %s</string>
-    <string name="tvinput_err_matching_key">Knopffinden fehlgeschlagen. Grund: %s</string>
+    <string name="tvinput_outfield_mkey_msg">Gefundene Taste(n): %s</string>
+    <string name="tvinput_outfield_ekey_msg">Betätigte Taste(n): %s</string>
+    <string name="tvinput_err_enter_key">Taste(n) betätigen fehlgeschlagen. Grund: %s</string>
+    <string name="tvinput_err_matching_key">Taste(n) finden fehlgeschlagen. Grund: %s</string>
     <string name="useInfo">Benutzungshinweis:\n\n1. Aktivieren Sie die Google Spracherkennung \"auf jedem Bildschirm\"\n2. Sprechen Sie: \"OK Google\", um die Spracherkennung zu initialisieren.\n3. Sprechen Sie: \"Notiz an mich <![CDATA[<Aktion>]]>\", um eine Sprachaktion auszuführen.\n\nBeachten Sie: Die VoiceTV App muss als Standard für die Notizfunktion konfiguriert sein.</string>
 </resources>
